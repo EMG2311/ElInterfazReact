@@ -1,6 +1,7 @@
 import React from 'react';
 import {ProductView} from './productView'
 export const ProductTableView = ({ products, changeDialog, onDeleteProduct }) => {
+
   return (
     <>
 

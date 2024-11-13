@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const SelectCategory = ({handleCategoryChange})=>{
+export const SelectCategory = ({handleCategoryChange,category})=>{
     const [product,setProduct]=useState([]);
     const [error,setError]=useState();
 
@@ -18,13 +18,19 @@ export const SelectCategory = ({handleCategoryChange})=>{
       };
   
     return (<>
-        <select className="form-select" onClick={fetchCategories} onChange={handleCategoryChange}>
-      <option value="">Seleccionar categoría</option>
-      {product.map((e) => (
-        <option key={e.id} value={e.name}>
-          {e.name}
-        </option>
-      ))}
+      <select className="form-select" onClick={fetchCategories} onChange={handleCategoryChange}>
+        <option value={category}>{category}</option>
+        {product.map((e) => {
+          
+          if(category!=e.name){
+            return(
+              <option key={e.id} value={e.name}>
+                {e.name}
+              </option>
+              )
+          }
+            
+      })}
     </select>
     
     
