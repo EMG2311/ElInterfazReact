@@ -4,18 +4,19 @@ import { SelectCategory } from "./selectCategory";
 import { SuccessView } from "./SuccessView";
 import { useNavigate } from "react-router-dom";
 
-export const FormProduct = ()=>{
+export const FormProduct = ({handleCloseModal})=>{
     const [name,setName]=useState("");
     const [stock,setStock]=useState(0);
     const [price,setPrice]=useState(0);
     const [category,setCategory]=useState("");
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
-    const navegate = useNavigate();
+    //const navegate = useNavigate();
 
 
     const onClose= ()=>{
-        navegate('/');
+        handleCloseModal();
+      //  navegate('/');
         window.location.reload();
     }
 

@@ -3,6 +3,7 @@ import { SelectCategory } from "./selectCategory";
 import { SuccessView } from "./SuccessView";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { updateProduct } from "../service/submitFormProduct";
+import { NavMain } from "./NavMain";
 
 export const FormProductUpdate=()=>{
 
@@ -53,6 +54,7 @@ export const FormProductUpdate=()=>{
 
     return (
         <>
+        <NavMain/>
             <div className="container mt-5">
             <h2>Formulario de Producto</h2>
             <form onSubmit={handleSubmit}>

@@ -1,10 +1,11 @@
 import React from 'react';
 import {ProductView} from './productView'
+import { NavMain } from './NavMain';
 export const ProductTableView = ({ products, changeDialog, onDeleteProduct }) => {
 
   return (
     <>
-
+      <NavMain/>
       <table className="table table-striped table-responsive">
         <thead>
           <tr>

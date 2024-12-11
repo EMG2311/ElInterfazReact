@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap'; // Importando el Modal de React-Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'; // Asegúrate de importar los estilos de Bootstrap
 
-import {ProductTableView} from './components/productTableView'
-
-import { FormProduct } from './components/formProduct'
-import { Route, BrowserRouter,Link, Routes } from 'react-router-dom'
+import { ProductTableView } from './components/ProductTableView';
+import { FormProduct } from './components/FormProduct';
+import { FormProductUpdate } from './components/FormProductUpdate';
+import {  viewProduct } from './service/submitFormProduct'; // Asegúrate que estas funciones estén correctamente importadas y usadas.
 import { deleteProduct } from './service/deleteProduct';
-import { viewProduct } from './service/submitFormProduct';
-import { FormProductUpdate } from './components/formProductUpdate';
+import { ListCarrito } from './components/listCarrito';
+
 function App() {
-
-  const [openDialog,setOpenDialog]=useState(false);
-  const [products,setProducts] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [products, setProducts] = useState([]);
   const [productToDelete, setProductToDelete] = useState(null);
-  const [error,setError] = useState(null);
+  const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
 
-useEffect(() => {
-   viewProduct(setProducts,setError)
+  useEffect(() => {
+    viewProduct(setProducts, setError);
   }, []);
 
   useEffect(() => {
@@ -24,42 +27,34 @@ useEffect(() => {
       setOpenDialog(false);
 
       if (result && productToDelete) {
-        deleteProduct(productToDelete,products,setProducts); 
+        deleteProduct(productToDelete, products, setProducts);
       }
     }
-  }, [openDialog, productToDelete]);
+  }, [openDialog, productToDelete, products]);
 
-  // Función para manejar la eliminación del producto
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
   const changeDialog = (name) => {
-    setProductToDelete(name); // Almacena el nombre del producto que se desea eliminar
-    setOpenDialog(true); // Abre el cuadro de diálogo de confirmación
+    setProductToDelete(name);
+    setOpenDialog(true);
   };
-
-
 
   return (
     <>
       <BrowserRouter>
-          <nav className='navbar navbar-expand-lg bg-body-tertiary'>
-    
-            <Link className='navbar-brand' to="/">Mostrar productos</Link>
-            <div style={{ position: 'fixed', top: '10px', right: '10px' }}>
-              <Link to="/crearProducto" className="btn btn-primary" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', padding: '5px 10px' }}>
-                  + Agregar
-              </Link>
-          </div>
-          </nav>
 
         <Routes>
-          <Route path='/crearProducto' element={<FormProduct />} />
           <Route path='/updateProduct' element={<FormProductUpdate />} />
-          <Route path='/' element={<ProductTableView products={products}  changeDialog={changeDialog}/>} />
+          <Route path='/' element={<ProductTableView products={products} changeDialog={changeDialog} />} />
+          <Route path='/carrito' element={<ListCarrito/>}/>
         </Routes>
       </BrowserRouter>
 
-      
+
+     
     </>
   );
 }
 
-export default App
+export default App;
