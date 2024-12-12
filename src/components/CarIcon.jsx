@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
 
-export const CarIcon = ()=>{
+export const CarIcon = ({productsSelected})=>{
     const navigate = useNavigate();
     const handleClick = ()=>{
-        navigate("/")
+        navigate("/carrito",{ state: { products: productsSelected } })
     }
     return(
         <button onClick={handleClick} type="button" className="btn btn-primary">

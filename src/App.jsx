@@ -9,6 +9,7 @@ import { FormProductUpdate } from './components/FormProductUpdate';
 import {  viewProduct } from './service/submitFormProduct'; // Asegúrate que estas funciones estén correctamente importadas y usadas.
 import { deleteProduct } from './service/deleteProduct';
 import { ListCarrito } from './components/listCarrito';
+import { Carrito } from './components/Carrito';
 
 function App() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -47,7 +48,8 @@ function App() {
         <Routes>
           <Route path='/updateProduct' element={<FormProductUpdate />} />
           <Route path='/' element={<ProductTableView products={products} changeDialog={changeDialog} />} />
-          <Route path='/carrito' element={<ListCarrito/>}/>
+          <Route path='/comprar' element={<ListCarrito/>}/>
+          <Route path='/carrito' element={<Carrito/>}/>
         </Routes>
       </BrowserRouter>
 
